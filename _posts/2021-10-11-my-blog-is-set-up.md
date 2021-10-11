@@ -4,7 +4,7 @@ title: "My Blog IS Set Up"
 subtitle: "Just a fork website"
 date: 2021-10-11
 author: "Bedoom"
-header-img: "img/post-bg-2015.jpg"
+header-style: text
 tags: 
   - 周记
 ---
@@ -15,10 +15,13 @@ tags:
 
 周四，我第一次上书法课，从起初的连握笔拿笔也不会，到最后“照猫画驴”，我也思考了很多。书法是个慢话，急不得，接下来我会学习如何让自己的节奏慢下来，找到一个适合自己区间。最后，来欣赏一下这节课的成果吧📄
 
-<img src="2021-10-11-new-post.assets/KYWEQ$LTI6LSVPQNCZM`_A.jpg" alt="img" style="zoom:25%;" />
+<img src="../img/blog-img/KYWEQ$LTI6LSVPQNCZM`_A.jpg"  />
+
+<img src="./img/blog-img/KYWEQ$LTI6LSVPQNCZM`_A.jpg" alt="img" style="zoom:25%;" />
 
 以上都是流水账，接下来是最最重要的是，我的博客🎉🎉🎉终于完成了👉👉👉👉👉[Bedoom‘s Blog](https://bedoom.github.io/)
 
 Bedoom‘s Blog 花费了我三天的时间，把一位大佬源码看了一遍，又改了一遍，对于我这种小白来说，已经是做到了极致，以后有时间我会实现更多的idea，敬请期待吧！
 
-![image-20211011170954320](2021-10-11-new-post.assets/image-20211011170954320.png)
+![image-20211011170954320](../img/blog-img/image-20211011170954320.png)
+
