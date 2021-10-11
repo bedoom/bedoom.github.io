@@ -17,7 +17,6 @@ tags:
 
 <img src="../img/blog-img/KYWEQ$LTI6LSVPQNCZM`_A.jpg"  />
 
-<img src="./img/blog-img/KYWEQ$LTI6LSVPQNCZM`_A.jpg" alt="img" style="zoom:25%;" />
 
 以上都是流水账，接下来是最最重要的是，我的博客🎉🎉🎉终于完成了👉👉👉👉👉[Bedoom‘s Blog](https://bedoom.github.io/)
 
