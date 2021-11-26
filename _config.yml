@@ -37,7 +37,7 @@ bedoom:
   type      : person # "person" (default), "organization"
   name      : bedoom
   url       : bedoom.github.io
-  avatar    : img/avatar-bedoom-ny.jpg # path or url of avatar image (square)
+  avatar    : https://gitee.com/bedoom/images/raw/master/202111262223874.jpg # path or url of avatar image (square)
   bio       : A junior student majoring in CS.
   email     : 3163026087@qq.com
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
@@ -209,7 +209,7 @@ defaults:
     values:
       layout: article
       sharing: true
-      license: true
+      license: false
       aside:
         toc: true
       show_edit_on_github: true

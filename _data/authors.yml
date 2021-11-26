@@ -1,7 +1,7 @@
 bedoom:
   name      : bedoom
   url       : https://bedoom.github.io
-  avatar    : img/avatar-bedoom-ny.jpg
+  avatar    : https://gitee.com/bedoom/images/raw/master/202111262223874.jpg
   bio       : A junior student majoring in CS
   email     : 3163026087@qq.com
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
