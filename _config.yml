@@ -33,7 +33,7 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 
 ## => Author and Social
 ##############################
-author:
+bedoom:
   type      : person # "person" (default), "organization"
   name      : bedoom
   url       : bedoom.github.io
