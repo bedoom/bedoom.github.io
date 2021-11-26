@@ -36,7 +36,7 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 author:
   type      : person # "person" (default), "organization"
   name      : bedoom
-  url       : 
+  url       : bedoom.github.io
   avatar    : img/avatar-bedoom-ny.jpg # path or url of avatar image (square)
   bio       : A junior student majoring in CS.
   email     : 3163026087@qq.com
@@ -131,7 +131,8 @@ comments:
     clientSecret: 6371d7d33b0a90e0e7acec23a653ba624b8ecb4c # GitHub Application Client Secret
     repository  : bedoom.github.io # GitHub repo
     owner       : bedoom # GitHub repo owner
-    admin: bedoom # GitHub repo owner and collaborators, only these guys can initialize GitHub issues, IT IS A LIST.
+    admin: 
+      - bedoom # GitHub repo owner and collaborators, only these guys can initialize GitHub issues, IT IS A LIST.
       # - your GitHub Id
 
   ## Valine
