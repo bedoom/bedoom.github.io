@@ -1,10 +1,8 @@
 ---
-layout: post
+layout: article
 title: "My Blog IS Set Up"
-subtitle: "Just a fork website"
 date: 2021-10-11
 author: "Bedoom"
-header-style: text
 tags: 
   - 周记
 ---

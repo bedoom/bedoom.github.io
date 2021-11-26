@@ -18,7 +18,7 @@ desc "Begin a new post in #{CONFIG['posts']}"
 task :post do
   abort("rake aborted: '#{CONFIG['posts']}' directory not found.") unless FileTest.directory?(CONFIG['posts'])
   title = ENV["title"] || "new-post"
-  subtitle = ENV["subtitle"] || "This is a subtitle"
+  # subtitle = ENV["subtitle"] || "This is a subtitle"
   slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   begin
     date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
@@ -34,12 +34,21 @@ task :post do
   puts "Creating new post: #{filename}"
   open(filename, 'w') do |post|
     post.puts "---"
-    post.puts "layout: post"
+    post.puts "layout: article"
     post.puts "title: \"#{title.gsub(/-/,' ')}\""
-    post.puts "subtitle: \"#{subtitle.gsub(/-/,' ')}\""
+    post.puts "mode: immersive"
+    post.puts "header:"
+    post.puts "  theme: dark"
+    post.puts "article_header:"
+    post.puts "  type: overlay"
+    post.puts "  theme: dark"
+    post.puts "background_color: '#123'"
+    post.puts "background_image: false"
     post.puts "date: #{date}"
     post.puts "author: \"Bedoom\""
     post.puts "header-img: \"img/post-bg-2015.jpg\""
+    post.puts "mathjax_autoNumber: false"
+    post.puts "show_tags: true"
     post.puts "tags: []"
     post.puts "---"
   end

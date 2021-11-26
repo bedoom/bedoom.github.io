@@ -1,10 +1,8 @@
 ---
-layout: post
+layout: article
 title: "Self-improvement"
-subtitle: "自我感动"
 date: 2021-10-18
 author: "Bedoom"
-header-style: text
 tags: 
   - 周记
 ---
