@@ -208,13 +208,13 @@ defaults:
     values:
       layout: article
       sharing: true
-      comment: true
       license: true
       aside:
         toc: true
       show_edit_on_github: true
       show_subscribe: true
       pageview: false
+      show_author_profile: true
 
 
 ## => Plugins
