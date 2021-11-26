@@ -55,7 +55,7 @@ author:
 
 ## => GitHub Repository (if the site is hosted by GitHub)
 ##############################
-repository: 
+repository: bedoom/bedoom.github.io
 repository_tree: master
 
 
@@ -84,8 +84,8 @@ toc:
 ## => Markdown Enhancements
 ##############################
 ## Mathjax
-mathjax: # false (default), true
-mathjax_autoNumber: # false (default), true
+mathjax: true # false (default), true
+mathjax_autoNumber: false # false (default), true
 
 ## Mermaid
 mermaid: # false (default), true
@@ -129,9 +129,9 @@ comments:
   gitalk:
     clientID    : 5cd64ea9e0323d302f22 # GitHub Application Client ID
     clientSecret: 6371d7d33b0a90e0e7acec23a653ba624b8ecb4c # GitHub Application Client Secret
-    repository  : bedoomm.github.io # GitHub repo
-    owner       : bedoomm # GitHub repo owner
-    admin: bedoomm # GitHub repo owner and collaborators, only these guys can initialize GitHub issues, IT IS A LIST.
+    repository  : bedoom.github.io # GitHub repo
+    owner       : bedoom # GitHub repo owner
+    admin: bedoom # GitHub repo owner and collaborators, only these guys can initialize GitHub issues, IT IS A LIST.
       # - your GitHub Id
 
   ## Valine
@@ -169,11 +169,11 @@ search:
 ## => Analytics
 ##############################
 analytics:
-  provider: false # false (default), "google", "custom"
+  provider: google # false (default), "google", "custom"
 
   ## Google Analytics
   google:
-    tracking_id : # Google Analytics id for the site
+    tracking_id : G-ES94EKB27F # Google Analytics id for the site
     anonymize_ip: false # Anonymize IP tracking for Analytics
 
 
@@ -213,7 +213,7 @@ defaults:
         toc: true
       show_edit_on_github: true
       show_subscribe: true
-      pageview: true
+      pageview: false
 
 
 ## => Plugins
