@@ -16,10 +16,26 @@ tags:
 <div class="card">   
     <div class="card__content">     
         <div class="card__header">       
+            <h4>管态和目态</h4>     
+        </div>    
+        <p></p> 
+    </div>
+</div>
+
+ <div class="grid-container">   
+     <div class="grid grid--p-3">     
+         <div class="cell cell--6">
+<div class="card">   
+    <div class="card__content">     
+        <div class="card__header">       
             <h4>操作系统</h4>     
         </div>    
-        <p>操作系统是计算机系统中的系统软件，是能有效地组织和管理计算机系统中的硬件和软件资源，合理地组织计算机工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够合理、方便、有效地使用计算机，使整个计算机系统能高效运行的一组程序模块。</p> 
+        <p>用户提供各种服务功能，使得用户能够合理、方便、有效地使用计算机，使整个计算机系统能高效运行的一组程序模块。</p> 
     </div>
+</div>
+         </div>     
+         <div class="cell cell--6">
+<div class="card">   
     <div class="card__content">     
         <div class="card__header">       
             <h4>特权指令和非特权指令</h4>     
@@ -28,17 +44,14 @@ tags:
         <p>非特权指令就是用户和操作系统都可以使用的指令。</p> 
     </div>
 </div>
-
-<div class="card">   
-    <div class="card__content">     
-        <div class="card__header">       
-            <h4>管态和目态</h4>     
-        </div>    
-        <p></p> 
-    </div>
+         </div>     
+         <div class="cell cell--6">
+             <div>6 cells</div></div>     
+         <div class="cell cell--6">
+             <div>6 cells</div>
+         </div>  
+     </div>
 </div>
-
- 
 
 
 
