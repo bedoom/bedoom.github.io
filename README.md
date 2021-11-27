@@ -49,12 +49,12 @@ This is Bedoom's Blog. I will share best things with you.
 │   ├── css
 │   │   └── blog.scss
 │   └── images
-├── tools
-├── 404.html
+├── tools                            // 小脚本
+├── 404.html                         // 当无法访问时出现的页面
 ├── Gemfile
-├── _config.yml
-├── about.md
-├── archive.html
+├── _config.yml                      // 全局变量设置
+├── about.md                         // about页面配置
+├── archive.html                     // archive页面配置
 ├── favicon.ico
 ├── gulpfile.js
 ├── index.html
@@ -62,3 +62,4 @@ This is Bedoom's Blog. I will share best things with you.
 └── package.json
 ```
 
+# 
