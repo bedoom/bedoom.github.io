@@ -20,15 +20,14 @@ This is Bedoom's Blog. I will share best things with you.
 │   ├── search-providers             // 搜索配置
 │   ├── sharing-providers            // 分享配置
 │   ├── sidebar						 // 侧边栏目录配置 
-│   ├── snippets
-│   ├── svg
+│   ├── svg                          // 各种logo图标
 │   │   ├── icon
 │   │   │   ├── social
 │   │   │   │   ├── facebook.svg
 │   │   │   │   └── ...
 │   │   └── logo.svg
 │   └── ...
-├── _layouts
+├── _layouts                         // 布局
 │   ├── 404.html
 │   ├── archive.html
 │   ├── article.html
@@ -37,7 +36,16 @@ This is Bedoom's Blog. I will share best things with you.
 │   ├── none.html
 │   └── page.html
 ├── _sass
-├── assets
+│   ├── additional
+│   │   ├── _alert.sass              // 强调框配置
+│   │   ├── _photo-frame.sass        // 图片展示配置
+│   │   └── _tag.sass                // 标签展示配置
+│   ├── animate                      // 动画
+│   ├── common                       // 文字大小和变量设定
+│   ├── component                    // 组件库配置
+│   ├── layout                       // 布局scss
+│   └── skins                        // 主题配置
+├── assets                           // 所拥有的资源
 │   ├── css
 │   │   └── blog.scss
 │   └── images
