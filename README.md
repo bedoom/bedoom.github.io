@@ -1,6 +1,24 @@
 # 个人博客
 
+<a href="https://github.com/bedoom">
+<img src="https://img.shields.io/badge/author-Bedoom-red" alt="author">
+</a><a href="./LICENSE">
+<img src="https://img.shields.io/badge/license-MIT-blue" alt="license">
+</a>
+
 This is Bedoom's Blog. I will share best things with you.
+
+# 页面快照
+
+<div align=center>    <img width = "70%" height = "70%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://gitee.com/bedoom/images/raw/master/202111271936032.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">主页面</div> </div>
+
+<div align=center>    <img width = "70%" height = "70%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://gitee.com/bedoom/images/raw/master/202111271937603.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">文章页面</div> </div>
+
+<div align=center>    <img width = "70%" height = "70%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://gitee.com/bedoom/images/raw/master/202111271938211.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">Archive页面</div> </div>
+
+<div align=center>    <img width = "70%" height = "70%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://gitee.com/bedoom/images/raw/master/202111271939866.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">About页面</div> </div>
+
+
 
 # 文件目录
 
@@ -62,4 +80,5 @@ This is Bedoom's Blog. I will share best things with you.
 └── package.json
 ```
 
-# 
+# 页面快照
+
