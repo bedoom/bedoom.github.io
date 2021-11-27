@@ -22,7 +22,7 @@ header:
       fr-FR   : *FR
       fr-LU   : *FR
       # @end locale config
-    url: /archive.html
+    url: /index.html
   - titles:
       # @start locale config
       en      : &EN       Archive
@@ -46,7 +46,7 @@ header:
       fr-FR   : *FR
       fr-LU   : *FR
       # @end locale config
-    url: /index.html
+    url: /archive.html
 
   - titles:
       # @start locale config
