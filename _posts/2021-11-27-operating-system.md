@@ -11,16 +11,9 @@ tags:
   - 操作系统
 ---
 
-# 01 引论
+# 01 引论与用户接口和作业管理
 
-<div class="card">   
-    <div class="card__content">     
-        <div class="card__header">       
-            <h4>管态和目态</h4>     
-        </div>    
-        <p></p> 
-    </div>
-</div>
+## 1.1 概念解释
 
  <div class="grid-container">   
      <div class="grid grid--p-3">     
@@ -46,16 +39,43 @@ tags:
 </div>
          </div>     
          <div class="cell cell--6">
-             <div>6 cells</div></div>     
+             <div class="card">
+                 <div class="card_content">
+                     <div class="card_header">
+                         <h4>管态和目的的概念</h4>
+                     </div>
+                     <p>管态：操作系统管理程序运行时状态。可执行全部指令，使用全部资源，具有改变处理机状态的能力。</p>
+                     <p>目态：用户运行时状态，只能执行非特权指令。
+                     </p>
+                 </div>
+             </div>
+         </div>     
          <div class="cell cell--6">
-             <div>6 cells</div>
+             <div class="card">
+             	<div class="card_content">
+                    <div class="card_header">
+                        <h4>
+                            多道程序设计
+                        </h4>
+                    </div>
+                    <p>多道程序设计技术是指在内存同时放若干道程序，使它们在系统中并发执行，共享系统中的各种资源。当一道程序暂停执行时，CPU立即转去执行另一道程序。</p>
+                 </div>
+             </div>
          </div>  
      </div>
 </div>
 
+<div class="card">   
+    <div class="card__content">     
+        <div class="card__header">       
+            <h4>并行与并发</h4>     
+        </div>    
+        <p>并行性是指两个或多个事件在同一时刻发生</p>
+<p>并发性是指两个或多个事件在同一时间间隔内发生，在多道程序环境下，并发性指宏观上在一段时间内有多道程序在同时运行，在微观上这些程序是交替执行的。</p> 
+    </div>
+</div>
 
-
-管态和目态的概念 多道程序设计 并发二、简答
+## 1.2 简答
 
 \1. 操作系统的功能主要包括哪些？
 
@@ -65,7 +85,7 @@ tags:
 
 \4. 计算机操作系统有何作用？
 
-# 02 用户接口和作业管理
+# 02 
 
 
 
