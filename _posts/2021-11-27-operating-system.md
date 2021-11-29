@@ -189,7 +189,7 @@ tags:
 ### 2.2 进程的基本状态转换
 
 <div class="grid">   
-    <div class="cell cell--5">
+    <div class="cell cell--5" align=center>
         <img src="https://gitee.com/bedoom/images/raw/master/202111292037186.png" alt="image-20211129203659986"  />
     </div>  
     <div class="cell cell--auto">
@@ -208,7 +208,7 @@ tags:
     </div> 
 </div>
 
-
+**进程之间的转换**
 
 就绪状态
 
