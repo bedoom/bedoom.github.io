@@ -14,8 +14,8 @@ header:
       zh-Hant:  關於
     url:        /blog/about.html
   - titles:
-    en:       GitHub
-    zh:       GitHub
-    zh-Hans:  GitHub
-    zh-Hant:  GitHub
-  url:        https://bedoom.github.io
+      en:       GitHub
+      zh:       GitHub
+      zh-Hans:  GitHub
+      zh-Hant:  GitHub
+    url:        https://bedoom.github.io
