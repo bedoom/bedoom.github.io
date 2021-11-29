@@ -237,7 +237,7 @@ tags:
 
   2. 索引方式
 
-     ![image-20211129212509998](https://gitee.com/bedoom/images/raw/master/202111292125060.png){.shadow}
+     ![image-20211129212509998](https://gitee.com/bedoom/images/raw/master/202111292125060.png){:.shadow}
 
      系统根据所有进程的状态建立几张索引表，例如，就绪索引表、阻塞索引表等，并把索引表在内存的首地址记录与一些专用单元中。在每个索引表的表目中，记录具有相应状态的某个进程控制块PCB中的地址。
 
