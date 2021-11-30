@@ -4,6 +4,7 @@ title: "HUB操作系统考试内容"
 date: 2021-11-27
 modify_date: 2021-11-29
 author: "Bedoom"
+mathjax: true
 mathjax_autoNumber: false
 mermaid: true
 show_tags: true
@@ -358,7 +359,7 @@ tags:
   
   3. 最高响应比优先调度算法
   
-     $$x_1 = {-b + \sqrt{b^2-4ac} \over 2a}$$
+     $$R = {T_w + T_s \over T_s}$$​
   
      $R$ 响应比
   
