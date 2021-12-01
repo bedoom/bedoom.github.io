@@ -1,26 +1,23 @@
-name: Gitee repos mirror periodic job
-
 on:
+  workflow_dispatch:
   schedule:
-    # Runs at 01:00 UTC (9:00 AM Beijing) every day
-    - cron:  '00 0,8,14 * * *'
+    - cron: '0 1 * * *'
 
+name: Mirror GitHub Selected Repos to Gitee
 jobs:
-  build:
-
+  run:
+    name: Run
     runs-on: ubuntu-latest
-
     steps:
-
-    - name: Mirror the Github organization repos to Gitee.
-      uses: Yikun/hub-mirror-action@v1.0
+    - name: Checkout source codes
+      uses: actions/checkout@v2
+    - name: Mirror Github to Gitee with white list
+      uses: Yikun/hub-mirror-action@master
       with:
         src: github/bedoom
         dst: gitee/bedoom
         dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
         dst_token:  ${{ secrets.GITEE_TOKEN }}
-        account_type: org
-        timeout: 600
-        debug: true
+        static_list: 'bedoom.github.io'
+        mappings: "bedoom.github.io=>bedoom"
         force_update: true
-        # black_list: "mysql-server,kunpeng-mpam,hadoop,kunpengcompute.github.io,spark,spark-website,server,postgres"
