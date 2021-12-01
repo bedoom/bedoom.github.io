@@ -18,6 +18,6 @@ jobs:
         dst: gitee/bedoom
         dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
         dst_token:  ${{ secrets.GITEE_TOKEN }}
-        static_list: 'bedoom.github.io'
+        static_list: 'bedoom.github.io/_posts'
         mappings: "bedoom.github.io=>bedoom"
         force_update: true
