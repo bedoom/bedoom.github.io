@@ -106,9 +106,9 @@ sharing:
 ## => Analytics
 ##############################
 analytics:
-  provider: google
-  google:
-    tracking_id: UA-213705660-1
+  provider: custom
+  baidu:
+    tracking_id: d8c8c77f64a4458cc18334644eb7df87
 
 
 ## => Build
