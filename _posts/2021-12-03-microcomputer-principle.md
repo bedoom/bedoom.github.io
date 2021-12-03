@@ -5,8 +5,6 @@ date: 2021-12-03
 modify_date: 2021-12-03
 author: "Bedoom"
 mathjax_autoNumber: false
-sidebar:
-  nav: hbu-exam
 show_tags: true
 tags:
   - HBU考试内容
@@ -16,7 +14,7 @@ tags:
 
 ![人人都笑躺平人人都在躺平](https://gitee.com/bedoom/images/raw/master/202112031138646.jpeg)
 
-<!---more-->
+<!--more-->
 
 ## 01微型计算机系统概述
 
