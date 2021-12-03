@@ -19,3 +19,10 @@ header:
       zh-Hans:  GitHub
       zh-Hant:  GitHub
     url:        https://github.com/bedoom/bedoom.github.io
+
+hbu-exam:
+  - title:      操作系统
+    url:        /post/operating-system
+  - title:      微机原理
+    url:        /post/hbu-microcomputer-principle
+  

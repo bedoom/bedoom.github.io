@@ -10,8 +10,7 @@ mathjax_autoNumber: false
 mermaid: true
 show_tags: true
 tags: 
-  - HUB考试内容
-  - 操作系统
+  - HBU考试内容
 ---
 
 河北大学操作系统重点考试内容。希望大家都有一个好成绩。
@@ -438,3 +437,6 @@ tags:
   | 拥有资源 | 否                   | 是                           |
   | 系统开销 | 较小                 | 较大                         |
 
+## TODO
+
+未完待续......
