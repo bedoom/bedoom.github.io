@@ -5,6 +5,8 @@ date: 2021-12-03
 modify_date: 2021-12-03
 author: "Bedoom"
 mathjax_autoNumber: false
+sidebar:
+  nav: hbu-exam
 show_tags: true
 tags:
   - HBU考试内容

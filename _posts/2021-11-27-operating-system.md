@@ -9,6 +9,8 @@ mathjax: true
 mathjax_autoNumber: false
 mermaid: true
 show_tags: true
+sidebar:
+  nav: hbu-exam
 tags: 
   - HBU考试内容
 ---
