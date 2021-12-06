@@ -4,8 +4,6 @@ title: "HBU微机原理考点总结"
 date: 2021-12-03
 modify_date: 2021-12-03
 author: "Bedoom"
-sidebar:
-  nav: hbu-exam
 mathjax_autoNumber: false
 show_tags: true
 tags:

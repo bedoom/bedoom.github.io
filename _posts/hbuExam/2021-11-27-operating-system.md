@@ -6,8 +6,6 @@ modify_date: 2021-11-30
 sharing: true
 author: "Bedoom"
 mathjax: true
-aside:
-  nav: hbu-exam
 mathjax_autoNumber: false
 mermaid: true
 show_tags: true
