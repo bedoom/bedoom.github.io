@@ -96,7 +96,7 @@ use ieee.std_logic_unsignal.all;
 
 entity counter10 is
     port(clk, clr: in std_logic;
-        q: out std_logic_vector(3 downto 0);
+        q: buffer std_logic_vector(3 downto 0);
         co: out std_logic);
 end counter10;
     
