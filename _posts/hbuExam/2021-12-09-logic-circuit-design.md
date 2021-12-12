@@ -28,15 +28,14 @@ tags:
         <div class="cell cell--6"><div><img src="https://gitee.com/bedoom/images/raw/master/202112091631474.png" alt="image-20211209163059790"  /></div></div>     
     </div>
 </div>
-
 **方法一**：写出表达式直接一一对应，是最简单的，但是I don't like。
 
 ```vhdl
 entity adder4 if
-    port(a, b: std_logic_vector(3 downto 0);
-        ci: std_logic;
-        s: std_logic_vector(3 downto 0);
-        co: std_logic);
+    port(a, b: in std_logic_vector(3 downto 0);
+        ci: in std_logic;
+        s: out std_logic_vector(3 downto 0);
+        co: out std_logic);
 end adder4;
     
 ARCHITECTURE rtl OF adder4_3 IS
@@ -77,4 +76,50 @@ END rtl;
 
 
 ## 时序逻辑设计
+
+时序电路的设计会比组合逻辑电路的设计复杂一些，因为时序电路的输出不仅与当前的输入有关，还与以前的输出有关。因此时序电路必然有存储单元，一般为存储器或者寄存器。
+
+1. 直接描述转换真正表
+2. 先构造寄存器，然后用RTL描述寄存器之间的逻辑关系
+3. 使用结构描述，直接构造电路图
+
+Eg:
+
+要求设计一个具有同步清零和并行输出功能的10进制加法计数器，其引脚名称和逻辑功能如下表所示。
+
+![image-20211212140637456](https://gitee.com/bedoom/images/raw/master/202112121406899.png){:.shadow}
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsignal.all;
+
+entity counter10 is
+    port(clk, clr: in std_logic;
+        q: out std_logic_vector(3 downto 0);
+        co: out std_logic);
+end counter10;
+    
+architecture my_function of counter10 is
+begin
+    process(clk, clr)
+    begin
+        if(clk'event and clk = '1') then
+            if(clr = '0') then
+                q<="0000"; co<='0';
+        	else
+                if(q="1001") then
+                    q<="0000"; co<='1';
+        		else
+                	q <= q+'1'; co <= '0';
+        		end if;
+            end if;
+        end if;
+    end process;
+end my_function;
+```
+
+
+
+
 
