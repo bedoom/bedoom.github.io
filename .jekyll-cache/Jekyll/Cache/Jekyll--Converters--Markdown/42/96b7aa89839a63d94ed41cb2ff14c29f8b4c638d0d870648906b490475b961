@@ -1,0 +1,28 @@
+I"
+<p>推荐一个学习git的网站：<a href="https://learngitbranching.js.org">https://learngitbranching.js.org</a>，对比廖雪峰、菜鸟教程和其他大佬的博客来说，它更加面向新手，更加通俗易懂。</p>
+
+<!--more-->
+
+<p>第一：在这个网站，你会看到我们提供的许多关卡。如果你是初学者，从第一关开始逐个向后挑战就可以了。 而如果你已经入门了，可以略过前面，直接挑战后面更有难度的关卡。</p>
+
+<p>第二：git操作被系统分类，更加有利于入门者掌握。</p>
+
+<div align="center">    <img width="70%" height="70%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://raw.githubusercontent.com/bedoom/imges/main/202111041547286.png" />    <br />    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">图1 网站页面实录一</div> </div>
+
+<div align="center">    <img width="70%" height="70%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://raw.githubusercontent.com/bedoom/imges/main/202111041550435.png" />    <br />    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">图2 网站页面实录二</div> </div>
+
+<p>第三：我觉得是最重要的一点就是将<strong>git操作可视化</strong>。它让你可以看到git是怎样操作文件记录的，会对你有很大启发。</p>
+
+<div align="center">    <img width="70%" height="70%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://raw.githubusercontent.com/bedoom/imges/main/202111041602685.gif" />    <br />    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">图3 网站操作实录</div> </div>
+
+<p><strong>由于网站不会提供答案，因此我也会将答案整理出来，和大家一起分享，已放进github仓库，请给一颗star</strong></p>
+
+<blockquote>
+  <p>learngitbranching地址：<a href="https://learngitbranching.js.org/">https://learngitbranching.js.org/</a></p>
+
+  <p>源github地址：<a href="https://github.com/pcottle/learnGitBranching">https://github.com/pcottle/learnGitBranching</a></p>
+
+  <p>网站答案地址：<a href="https://github.com/bedoom/learn-git-branching">https://github.com/bedoom/learn-git-branching</a></p>
+</blockquote>
+
+:ET

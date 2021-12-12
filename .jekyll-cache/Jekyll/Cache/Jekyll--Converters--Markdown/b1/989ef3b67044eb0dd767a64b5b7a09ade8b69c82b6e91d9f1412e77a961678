@@ -1,0 +1,54 @@
+I"�
+<p>github新手，还不懂如何用git操作github。就在昨天我在远端修改了我的一个博客，但忘了拉取到本地，今天用git再上传文件时，出现报错：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push
+To https://github.com/bedoom/bedoom.github.io.git
+ <span class="o">!</span> <span class="o">[</span>rejected]        main -&gt; main <span class="o">(</span>non-fast-forward<span class="o">)</span>
+error: failed to push some refs to <span class="s1">'https://github.com/bedoom/bedoom.github.io.git'</span>
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes <span class="o">(</span>e.g.
+hint: <span class="s1">'git pull ...'</span><span class="o">)</span> before pushing again.
+hint: See the <span class="s1">'Note about fast-forwards'</span> <span class="k">in</span> <span class="s1">'git push --help'</span> <span class="k">for </span>details.
+</code></pre></div></div>
+
+<!--more-->
+
+<p>大致意思就是远程仓库和本地仓库无法进行同步。</p>
+
+<p>因此我复制报错信息去<strong>stackflow</strong>去看了一下，终于找到解决问题的方法了😼</p>
+
+<hr />
+
+<ol>
+  <li>
+    <p>根据报错信息找到不同步的文件</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull
+error: Your <span class="nb">local </span>changes to the following files would be overwritten by merge:
+        _posts/2021-10-12-week-goal.md
+Please commit your changes or stash them before you merge.
+Aborting
+</code></pre></div>    </div>
+
+    <p>例如：我的不同步文件就是<strong>_posts/2021-10-12-week-goal.md</strong></p>
+  </li>
+  <li>
+    <p>将不同步文件还原的上次git push或git pull的版本</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout  _posts/2021-10-12-week-goal.md
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>这时就可以正常的git操作啦</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"create a file"</span>
+<span class="nv">$ </span>git push
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>当然，这是不同步文件较小，如果是文件很多，而且又不想将修改丢弃怎么办呢？</p>
+
+<p>这就要用到git的<strong>分支操作</strong>了，可以先提交的副分支上，然后进行分支的合并就可以啦。</p>
+:ET

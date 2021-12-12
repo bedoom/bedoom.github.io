@@ -1,0 +1,261 @@
+I"1D<h1 id="什么是socket编程">什么是socket编程</h1>
+
+<p>现在的软件开发大都需要网络通讯。不管是传统计算机，还是手机软件，还是物联网嵌入系统软件，这些都要和其他网络系统进行通讯。</p>
+
+<p>当今网络世界基本上都是使用<strong>TCP/IP</strong>协议进行通讯的。<strong>TCP/IP</strong>协议不是一句两句说清楚的，就记住<strong>TCP/IP</strong> 协议就是一种传输数据的方案。举个例子，在南京的小明要寄一个物品给北京的小强。首先要选择一个快递公司，这个快递公司相当于一种传输物品的规范。作为小明，他不用知道快递公司传输物品的方案，他只要知道 <strong>如何把物品交给收递员</strong> 就可以了；而作为小强，他也不需要知道 快递工作的方案，他只要知道 <strong>如何从收递员手中收快递</strong> 就行了。</p>
+
+<!--more-->
+
+<p>对于socket来说，可以用下面的一个图来表示：</p>
+
+<p><img src="https://gitee.com/bedoom/images/raw/master/202111052322328.png" alt="" class="shadow" /></p>
+
+<h1 id="tcp协议">TCP协议</h1>
+
+<p>TCP协议(Transmission Control Protocol)是一种面向连接、可靠的、基于字节流的传输层通信协议。</p>
+
+<ul>
+  <li>
+    <p>过程</p>
+
+    <ol>
+      <li>应用层向TCP层发送用于网间传输的、用8位字节表示的数据流。</li>
+      <li>TCP把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。</li>
+      <li>TCP把结果包传给IP层，由它来通过网络将包传送给接收端实体的TCP层。TCP为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。</li>
+      <li>接收端实体对已成功收到的包发回一个相应的确认（ACK）；如果发送端实体在合理的往返时延（RTT）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。TCP用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。</li>
+    </ol>
+  </li>
+  <li>
+    <p>特点</p>
+
+    <ol>
+      <li>基于流的方式</li>
+      <li>面向连接</li>
+      <li>可靠通信方式</li>
+      <li>在网络状况不佳的时候尽量降低系统由于重传带来的带宽开销</li>
+      <li>通信连接维护时面向通信的两个端点，而不考虑中间网段和节点</li>
+    </ol>
+  </li>
+  <li>
+    <p>工作方式</p>
+
+    <ul>
+      <li>
+        <p>建立连接 三次握手</p>
+
+        <div align="center">    <img width="50%" height="50%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://gitee.com/bedoom/images/raw/master/202111061718344.png" /> </div>
+
+        <p>当主动方发出SYN连接请求后，等待对方回答SYN+ACK，并最终对对方的 SYN 执行 ACK 确认。</p>
+
+        <ol>
+          <li>client发送一个SYN请求连接，同时会发送一个初始序号(ISN)</li>
+          <li>sever发回SYN作为应答，同时，将确认序号设为client的ISN+1，以完成对client请求的确认。</li>
+          <li>client必须将确认序号设置为服务器的ISN+1以对服务器进行确认。</li>
+        </ol>
+      </li>
+      <li>
+        <p>解除连接 四次挥手</p>
+
+        <div align="center">    <img width="50%" height="50%" style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://gitee.com/bedoom/images/raw/master/202111061735034.png" /> </div>
+
+        <p>建立一个连接需要三次握手，而终止一个连接要经过四次握手，这是由TCP的半关闭（half-close）造成的。</p>
+
+        <p>TCP通信是一个全双工通信，也就是说需要两边都要接收到FIN信号才行。</p>
+
+        <p>例如：client进程关闭时会给sever端发送一个FIN信号表示关闭通信，并等待sever端对FIN信号的确认；同时，sever端也会发送一个FIN，并等待client端对其确认。</p>
+
+        <p>若进行两次挥手的话，仅仅说明client不再给sever通信，但是没有终止sever对client的通信，因此连接并没有完全中断。</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="python代码示例">Python代码示例</h1>
+
+<p><strong>sever.py：</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># === TCP服务端 server.py ===
+</span><span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">IP</span> <span class="o">=</span> <span class="s">'0.0.0.0'</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">50000</span>
+<span class="n">BUFLEN</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="c1"># AF_INET表示该socket网络层使用IP协议
+# SOCK_STREAM表示该socket传输层使用tcp协议
+</span><span class="n">listenSocket</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">)</span>
+
+<span class="c1"># socket绑定地址和端口
+</span><span class="n">listenSocket</span><span class="p">.</span><span class="n">bind</span><span class="p">((</span><span class="n">IP</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+<span class="c1"># 设置最大连接数量
+</span><span class="n">listenSocket</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"服务端启动成功，在</span><span class="si">{</span><span class="n">RORT</span><span class="si">}</span><span class="s">端口等待客户端连接..."</span><span class="p">)</span>
+
+<span class="n">dataSocket</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">listenSocket</span><span class="p">.</span><span class="n">accept</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"接受一个客户端连接："</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># 尝试读取对方的信息
+</span>    <span class="c1"># BUFLEN指定在接收缓存里最多接收多少bytes
+</span>    <span class="n">recved</span> <span class="o">=</span> <span class="n">dataSocket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="n">BUFLEN</span><span class="p">)</span>
+    <span class="c1"># 如果客户端关闭，则也跟着退出
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">recved</span><span class="p">:</span>
+        <span class="k">break</span>
+    
+    <span class="c1"># 将接收的bytes进行译码
+</span>    <span class="n">info</span> <span class="o">=</span> <span class="n">recved</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"收到对方的信息：</span><span class="si">{</span><span class="n">info</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    
+    <span class="c1"># 给客户端一个回应
+</span>    <span class="n">dataSocket</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s">"服务端接收到的信息为：</span><span class="si">{</span><span class="n">info</span><span class="si">}</span><span class="s">"</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+<span class="c1"># 关闭
+</span><span class="n">dataSocket</span><span class="p">.</span><span class="n">cloce</span><span class="p">()</span>
+<span class="n">listenSocket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>client.py:</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># === TCP客户端 client.py ===
+</span><span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># 目标IP和端口号
+</span><span class="n">IP</span> <span class="o">=</span> <span class="s">'127.0.0.1'</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">50000</span>
+<span class="c1"># 最大接收bytes
+</span><span class="n">BUFLEN</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="c1"># AF_INET表示该socket网络层使用IP协议
+# SOCK_STREAM表示该socket传输层使用tcp协议
+</span><span class="n">dataSocket</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="c1"># 连接目标IP和指定端口号的服务端
+</span><span class="n">dataSocket</span><span class="p">.</span><span class="n">connect</span><span class="p">((</span><span class="n">IP</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">toSend</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">'&gt;&gt;&gt; '</span><span class="p">)</span>
+    <span class="c1"># 如果输入的是exit，则程序结束
+</span>    <span class="k">if</span> <span class="n">toSend</span> <span class="o">==</span> <span class="s">'exit'</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="c1"># 将数据进行译码后传输bytes   
+</span>    <span class="n">dataSocket</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">toSend</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="c1"># 接收服务端返回的数据
+</span>    <span class="n">recved</span> <span class="o">=</span> <span class="n">dataSocket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="n">BUFLEN</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">recved</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">recved</span><span class="p">.</span><span class="n">decode</span><span class="p">())</span>
+<span class="n">dataSocket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h1 id="代码执行过程">代码执行过程</h1>
+
+<ol>
+  <li>
+    <p>首先我们先查看<code class="language-plaintext highlighter-rouge">50000</code>端口是否为活动端口。若是活动端口的话，请您再换一个端口，否则会报错（端口冲突）</p>
+
+    <p><strong>在cmd下输入</strong>：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\U</span>sers<span class="se">\M</span>C&gt;netstat <span class="nt">-an</span>|find <span class="s2">"50000"</span>
+</code></pre></div>    </div>
+
+    <p>若不是活动端口的话，不会有任何输出的，放心好啦。</p>
+  </li>
+  <li>
+    <p><strong>在相应的Python环境下运行sever.py</strong></p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>py sever.py  // 注意：conda环境下运行 python sever.py
+</code></pre></div>    </div>
+
+    <p>如果你先运行client.py 的话，会出现报错：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">"client.py"</span>, line 8, <span class="k">in</span> &lt;module&gt;
+    dataSocket.connect<span class="o">((</span>IP, SERVER_PORT<span class="o">))</span>
+ConnectionRefusedError: <span class="o">[</span>WinError 10061] 由于目标计算机积极拒绝，无法连接。
+</code></pre></div>    </div>
+
+    <p>这是由于服务端还没有打开，不是活动状态，因此会拒绝连接。</p>
+
+    <p><strong>正确运行</strong>：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(base) D:\github\20Sp-SocketChatRoom&gt;python sever.py
+服务端启动成功，在50000端口等待客户端连接...
+   
+</code></pre></div>    </div>
+
+    <p>此时再次查看端口<code class="language-plaintext highlighter-rouge">50000</code>：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\U</span>sers<span class="se">\M</span>C&gt;netstat <span class="nt">-an</span>|find <span class="s2">"50000"</span>
+  TCP    0.0.0.0:50000          0.0.0.0:0              LISTENING
+</code></pre></div>    </div>
+
+    <p>TCP是协议；0.0.0.0:50000是本地地址；0.0.0.0:0是外部地址；LISTENTING是状态。</p>
+  </li>
+  <li>
+    <p><strong>在相应的Python环境下运行client.py</strong></p>
+
+    <p>此时再次运行client.py</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>py client.py  // 注意：conda环境下运行 python client.py
+</code></pre></div>    </div>
+
+    <p><strong>对于sever</strong></p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>base<span class="o">)</span> D:<span class="se">\g</span>ithub<span class="se">\2</span>0Sp-SocketChatRoom&gt;python sever.py
+服务端启动成功，在50000端口等待客户端连接...
+接受一个客户端连接: <span class="o">(</span><span class="s1">'127.0.0.1'</span>, 6708<span class="o">)</span>
+</code></pre></div>    </div>
+
+    <p>这时会知道有一个IP为127.0.0.1，端口号为6708的客户端连接上来了。</p>
+
+    <p>为了验证是否正确，再次查看端口<code class="language-plaintext highlighter-rouge">50000</code>:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\U</span>sers<span class="se">\M</span>C&gt;netstat <span class="nt">-an</span>|find <span class="s2">"50000"</span>
+  TCP    0.0.0.0:50000          0.0.0.0:0              LISTENING
+  TCP    127.0.0.1:6708         127.0.0.1:50000        ESTABLISHED
+  TCP    127.0.0.1:50000        127.0.0.1:6708         ESTABLISHED
+</code></pre></div>    </div>
+
+    <p>会发现多出两个连接。而且这两个的本地地址和外部地址正好是相反的，这也侧面验证了TCP协议是一个全双工通信协议。</p>
+
+    <p>其中看到了127.0.0.1:6708，状态为 ESTABLISHED，证明连接成功。</p>
+  </li>
+  <li>
+    <p><strong>TCP通信实录</strong></p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>base<span class="o">)</span> D:<span class="se">\g</span>ithub<span class="se">\2</span>0Sp-SocketChatRoom&gt;python tc.py
+<span class="o">&gt;&gt;&gt;</span> good boy
+服务端接收到了信息 good boy
+<span class="o">&gt;&gt;&gt;</span> 好男孩
+服务端接收到了信息 好男孩
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>    </div>
+
+    <p>通过实验，表明可以正确输入中英文，且收发正常。</p>
+  </li>
+  <li>
+    <p><strong>结束进程</strong></p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>base<span class="o">)</span> D:<span class="se">\g</span>ithub<span class="se">\2</span>0Sp-SocketChatRoom&gt;python tc.py
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">exit</span>
+</code></pre></div>    </div>
+
+    <p>此时再次查看端口号<code class="language-plaintext highlighter-rouge">50000</code></p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TCP    127.0.0.1:6708         127.0.0.1:50000        TIME_WAIT
+</code></pre></div>    </div>
+
+    <p>这是由于发起socket主动关闭的一方 socket将进入TIME_WAIT状态,TIME_WAIT状态将持续2个MSL(Max Segment Lifetime),在Windows下默认为4分钟,即240秒,TIME_WAIT状态下的socket不能被回收使用。</p>
+
+    <p>四分钟以后再次查看，没有活动端口。</p>
+  </li>
+</ol>
+
+<h1 id="引用">引用</h1>
+
+<blockquote>
+  <ol>
+    <li><a href="https://link.zhihu.com/?target=http%3A//www.byhy.net/tut/py/etc/socket/">socket编程  白月黑羽</a></li>
+    <li><a href="https://link.zhihu.com/?target=https%3A//baike.baidu.com/item/TCP/33012">TCP_百度百科</a></li>
+  </ol>
+</blockquote>
+
+:ET

@@ -1,0 +1,46 @@
+I"<h2 id="vhdl语言客体">vhdl语言客体</h2>
+
+<p>在VHDL中，可以赋予一个值的对象就称为<strong>客体</strong>。客体主要包括：signal、variable、constant和file。在客体使用前必须说明。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>客体类别</th>
+      <th>含义</th>
+      <th>说明场合</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>signal</td>
+      <td>信号是全局量</td>
+      <td>architecture，package，entity</td>
+    </tr>
+    <tr>
+      <td>variable</td>
+      <td>共享变量是全局量；局部变量是局部量</td>
+      <td>process、function、procedure</td>
+    </tr>
+    <tr>
+      <td>constant</td>
+      <td>常数是全局量</td>
+      <td>上面两种场合均可</td>
+    </tr>
+    <tr>
+      <td>file</td>
+      <td>文件是全局量</td>
+      <td>architecture、package、entity</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="常数">常数</h3>
+
+<p>顾名思义，常数是一个固定的数（废话 :dog: ）。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">constant</span> <span class="err">常数名{</span><span class="p">,</span> <span class="err">常数名}</span><span class="p">:</span> <span class="err">数据类型</span> <span class="p">:</span><span class="o">=</span> <span class="err">表达式</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p class="warning">常量一旦赋值就不能再改变，且常量所赋值和定义的数据类型应一致。</p>
+
+:ET

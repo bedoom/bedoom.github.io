@@ -1,0 +1,13 @@
+I"8<p>github新手，还不懂如何用git操作github。就在昨天我在远端修改了我的一个博客，但忘了拉取到本地，今天用git再上传文件时，出现报错：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push
+To https://github.com/bedoom/bedoom.github.io.git
+ <span class="o">!</span> <span class="o">[</span>rejected]        main -&gt; main <span class="o">(</span>non-fast-forward<span class="o">)</span>
+error: failed to push some refs to <span class="s1">'https://github.com/bedoom/bedoom.github.io.git'</span>
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes <span class="o">(</span>e.g.
+hint: <span class="s1">'git pull ...'</span><span class="o">)</span> before pushing again.
+hint: See the <span class="s1">'Note about fast-forwards'</span> <span class="k">in</span> <span class="s1">'git push --help'</span> <span class="k">for </span>details.
+</code></pre></div></div>
+
+:ET
