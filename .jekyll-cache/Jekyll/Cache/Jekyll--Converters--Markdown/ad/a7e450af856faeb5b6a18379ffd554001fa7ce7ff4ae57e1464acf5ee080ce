@@ -1,0 +1,263 @@
+I"(C<h2 id="vhdl语言客体">vhdl语言客体</h2>
+
+<p>在VHDL中，可以赋予一个值的对象就称为<strong>客体</strong>。客体主要包括：signal、variable、constant和file。在客体使用前必须说明。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>客体类别</th>
+      <th>含义</th>
+      <th>说明场合</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>signal</td>
+      <td>信号是全局量</td>
+      <td>architecture，package，entity</td>
+    </tr>
+    <tr>
+      <td>variable</td>
+      <td>共享变量是全局量；局部变量是局部量</td>
+      <td>process、function、procedure</td>
+    </tr>
+    <tr>
+      <td>constant</td>
+      <td>常数是全局量</td>
+      <td>上面两种场合均可</td>
+    </tr>
+    <tr>
+      <td>file</td>
+      <td>文件是全局量</td>
+      <td>architecture、package、entity</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="常数">常数</h3>
+
+<p>顾名思义，常数是一个固定的数（废话 :dog: ）。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">constant</span> <span class="err">常数名{</span><span class="p">,</span> <span class="err">常数名}</span><span class="p">:</span> <span class="err">数据类型</span> <span class="p">:</span><span class="o">=</span> <span class="err">表达式</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p class="warning">常量一旦赋值就不能再改变，且常量所赋值和定义的数据类型应一致。</p>
+
+<!--more-->
+
+<p>Eg:</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">constant</span> <span class="n">width</span><span class="p">:</span> <span class="kt">integer</span> <span class="p">:</span><span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="k">constant</span> <span class="n">vcc</span><span class="p">:</span> <span class="kt">real</span> <span class="p">:</span><span class="o">=</span> <span class="s1">"1010"</span><span class="p">;</span> <span class="c1">--这样会报错，</span>
+		<span class="c1">--"1010"是std_logic_vector类型，不兼容</span>
+</code></pre></div></div>
+
+<h3 id="变量">变量</h3>
+
+<p>变量是暂存数据的量，分为<strong>共享变量</strong>和<strong>局部变量</strong>。</p>
+
+<ol>
+  <li>
+    <p>局部变量</p>
+
+    <p>局部变量只能在子程序和进程中使用，且必须加以说明。</p>
+
+    <div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">variable</span> <span class="err">变量名</span><span class="p">:</span> <span class="err">数据类型</span> <span class="err">约束条件</span><span class="p">:</span><span class="o">=</span><span class="err">表达式</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>Eg:</p>
+
+    <div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">variable</span> <span class="n">count</span><span class="p">:</span> <span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">99</span><span class="p">:</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>上面表示 count 只能表示 0~99 中的数，初始值为0。</p>
+  </li>
+  <li>
+    <p>共享变量</p>
+
+    <p>共享变量一般用于进程和子程序间的数据传递（<del>虽然不建议</del>），不多介绍了。</p>
+
+    <div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">shared</span> <span class="k">variable</span> <span class="err">变量名</span><span class="p">:</span> <span class="err">子类型名</span> <span class="err">[</span><span class="p">:</span><span class="o">=</span><span class="err">初始值]</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="信号">信号</h3>
+
+<p>信号是电子电路内部<strong>硬件连接</strong>的抽象。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">signal</span> <span class="err">信号名</span><span class="p">:</span> <span class="err">数据类型</span> <span class="err">约束条件</span><span class="p">:</span><span class="o">=</span><span class="err">表达式</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Eg:</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">signal</span> <span class="n">count</span><span class="p">:</span> <span class="kt">bit_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>信号之间的传递有实际的附加延时。信号<strong>不能</strong>在进程中说明。</p>
+
+<p>信号赋值格式：</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">目标信号名</span> <span class="o">&lt;=</span> <span class="err">表达式</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="变量-vs-信号">变量 VS 信号</h3>
+
+<ol>
+  <li>变量具有即时性，变量之间传递立即生效；信号具有非立即性，信号之间通信有延迟。</li>
+  <li>变量用作程序中暂存数据的量；信号用作电路中的信号连线。</li>
+  <li>信号是全局量；变量是局部量。</li>
+  <li>信号与变量的赋值语句不同。</li>
+</ol>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">PROCESS</span> <span class="p">(</span><span class="n">a</span><span class="err">，</span><span class="n">b</span><span class="err">，</span><span class="n">c</span><span class="err">，</span><span class="n">d</span><span class="p">)</span>
+	<span class="k">BEGIN</span>
+   		<span class="n">d</span><span class="o">&lt;=</span><span class="n">a</span><span class="err">；</span>
+   		<span class="n">x</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">d</span><span class="err">；</span>
+   		<span class="n">d</span><span class="o">&lt;=</span><span class="n">c</span><span class="err">；</span>
+   		<span class="n">y</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">d</span><span class="err">；</span>
+    <span class="k">END</span> <span class="k">PROCESS</span><span class="err">；</span>
+<span class="err">结果：</span>	  <span class="n">x</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="err">；</span>
+   		<span class="n">y</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="err">；</span>
+<span class="c1">-------------------------</span>
+	<span class="k">PROCESS</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+	<span class="k">VARIABLE</span> <span class="n">d</span><span class="err">：</span><span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="k">BEGIN</span>
+   		<span class="n">d</span><span class="err">：</span><span class="o">=</span><span class="n">a</span><span class="err">；</span>
+   		<span class="n">x</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">d</span><span class="err">；</span>
+   		<span class="n">d</span><span class="err">：</span><span class="o">=</span><span class="n">c</span><span class="err">；</span>
+   		<span class="n">y</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">d</span><span class="err">；</span>
+	<span class="k">END</span> <span class="k">PROCESS</span><span class="p">;</span>
+<span class="err">结果：</span>   <span class="n">x</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">a</span><span class="err">；</span>
+		<span class="n">y</span><span class="o">&lt;=</span><span class="n">b</span><span class="o">+</span><span class="n">c</span>
+</code></pre></div></div>
+
+<p class="success">当进程运行时，信号赋值语句从上到下顺序执行，但是由于赋值语句在进程结束后才能生效，所有 d 就被赋值成最后一次的值 c 。</p>
+
+<h3 id="文件">文件</h3>
+
+<p>文件定义格式</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="err">类型名</span> <span class="k">is</span> <span class="k">file</span> <span class="k">of</span> <span class="err">类型</span><span class="o">/</span><span class="err">子类型</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="vhdl语言数据类型">VHDL语言数据类型</h2>
+
+<p>VHDL语言是一种类型性很强的语言，每一种数据类型都规定了类属性和类操作。数据只能在数据的严格定义下来操作。</p>
+
+<h3 id="10种标准数据类型">10种标准数据类型</h3>
+
+<p><img src="https://s2.loli.net/2021/12/23/a6KYbcL3uIEiyge.png" alt="image-20211208173017491" class="shadow" /></p>
+
+<h3 id="用户定义数据类型">用户定义数据类型</h3>
+
+<p>用户定义数据类型说明语句的一般格式：</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="err">数据类型名</span> <span class="err">{</span><span class="p">,</span> <span class="err">数据类型名}</span> <span class="k">is</span> <span class="err">[数据类型定义]</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Eg:</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">--枚举</span>
+<span class="k">type</span> <span class="n">week</span> <span class="k">is</span> <span class="p">(</span><span class="n">sun</span><span class="p">,</span> <span class="n">mom</span><span class="p">,</span> <span class="n">tue</span><span class="p">,</span> <span class="n">wed</span><span class="p">,</span> <span class="n">thu</span><span class="p">,</span> <span class="n">fri</span><span class="p">,</span> <span class="n">sat</span><span class="p">);</span>
+
+<span class="c1">--数组</span>
+<span class="k">type</span> <span class="n">word</span> <span class="k">is</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span> <span class="k">to</span> <span class="mi">8</span><span class="p">)</span> <span class="k">of</span> <span class="kt">std_logic</span><span class="p">;</span>
+
+<span class="c1">--integer and real</span>
+<span class="k">type</span> <span class="n">digit</span> <span class="k">is</span> <span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">9</span><span class="p">;</span>
+
+<span class="c1">-- time</span>
+<span class="k">type</span> <span class="n">current</span> <span class="k">is</span> <span class="k">range</span> <span class="mi">-1000000</span> <span class="k">to</span> <span class="mi">1000000</span><span class="p">;</span>
+<span class="k">units</span> <span class="n">nA</span><span class="p">:</span>
+	<span class="err">μ</span><span class="n">A</span> <span class="o">=</span> <span class="mi">1000</span> <span class="n">nA</span><span class="p">;</span>
+	<span class="n">mA</span> <span class="o">=</span> <span class="mi">1000</span> <span class="err">μ</span><span class="n">A</span><span class="p">;</span>
+	<span class="n">A</span> <span class="o">=</span> <span class="mi">1000</span> <span class="n">mA</span><span class="p">;</span>
+<span class="k">end</span> <span class="k">units</span><span class="p">;</span>
+
+<span class="c1">--记录类型</span>
+<span class="k">type</span> <span class="n">bank</span> <span class="k">is</span> <span class="n">recode</span>
+    <span class="n">addr</span><span class="p">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">r0</span> <span class="p">:</span> <span class="kt">integer</span><span class="p">;</span>
+	<span class="n">inst</span><span class="p">:</span> <span class="n">instruction</span><span class="p">;</span>
+<span class="k">end</span> <span class="k">record</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="用户定义的子类型">用户定义的子类型</h3>
+
+<p>子类型是一个具有限制条件的类型，通常用来定义具有一定限制条件的基本数据类型对象。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">subtype</span> <span class="err">子类型名</span> <span class="k">is</span> <span class="err">数据类型名[约束范围]</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Eg:</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">subtype</span> <span class="n">Byte</span> <span class="k">is</span> <span class="kt">bit_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">signal</span> <span class="n">Byte1</span><span class="p">,</span> <span class="n">Byte2</span><span class="p">,</span> <span class="n">Byte3</span><span class="p">:</span> <span class="n">Byte</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="数据类型的转换">数据类型的转换</h3>
+
+<p>（1）类型标记法。用类型名称来实现关系密切的标量类型之间的转换。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">variable</span> <span class="n">x</span><span class="p">:</span> <span class="kt">integer</span><span class="p">;</span>
+<span class="k">variable</span> <span class="n">y</span><span class="p">:</span> <span class="kt">real</span><span class="p">;</span>
+
+<span class="n">x</span><span class="p">:</span><span class="o">=</span><span class="kt">integer</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>（2）类型函数法。利用库中的转换函数实现类型转换。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">to_bit</span><span class="p">();</span>
+<span class="n">to_std_logic</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p class="warning">引用时必须首先打开库和相应的程序包。</p>
+
+<h3 id="ieee标准">IEEE标准</h3>
+
+<p>STD_LOGIC类型数据的9中取值：</p>
+
+<ol>
+  <li>‘U’ 初始值</li>
+  <li>‘X’ 不定态</li>
+  <li>‘0’ 强制0</li>
+  <li>‘1’ 强制1</li>
+  <li>‘Z’ 高阻</li>
+  <li>‘W’ 弱信号不定态</li>
+  <li>‘L’ 弱信号0</li>
+  <li>‘H’ 弱信号1</li>
+  <li>‘_’ 不可能情况</li>
+</ol>
+
+<p><strong>X 方便系统仿真，Z 方便双向总线描述。</strong></p>
+
+<h2 id="vhdl运算操作符">VHDL运算操作符</h2>
+
+<p>（1）算术操作符 普通加减乘除</p>
+
+<p>（2）逻辑运算符</p>
+
+<p>not and or nand nor xor….</p>
+
+<p>（3）关系运算符</p>
+
+<p>&lt; &gt; =….</p>
+
+<p>（4）并置运算符</p>
+
+<p>&amp;</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="o">&lt;=</span><span class="s1">"0100"</span><span class="p">;</span>
+<span class="n">b</span><span class="o">&lt;=</span><span class="s1">"0011"</span><span class="p">;</span>
+<span class="n">y</span><span class="o">&lt;=</span><span class="n">a</span><span class="o">&amp;</span><span class="n">b</span><span class="p">;(</span><span class="n">y</span><span class="err">为</span><span class="s1">"01000011"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>并置运算也可以使用集合的方式，但仅能用于位连接。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dbus</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">d3</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p class="warning">当运算操作符相同时，并没有从左到右依次进行计算的顺序，因此请使用括号。</p>
+
+:ET

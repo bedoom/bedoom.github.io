@@ -12,7 +12,7 @@ tags:
 
 终于快复习完了 :star2:
 
-![luca-upper-Z-4kOr93RCI-unsplash](https://gitee.com/bedoom/images/raw/master/202112111711994.jpg)
+![luca-upper-Z-4kOr93RCI-unsplash](https://s2.loli.net/2021/12/23/SjPhFUpEouGmng9.jpg)
 
 <!--more-->
 
@@ -56,7 +56,7 @@ tags:
 
   系统为每个磁盘建立一个空闲表，表中每个登记项记录一组连续空间块的首块号。
 
-  ![image-20211211214831767](https://gitee.com/bedoom/images/raw/master/202112112148566.png){:.shadow}
+  ![image-20211211214831767](https://s2.loli.net/2021/12/23/ylTwGHsv17zW5NQ.png){:.shadow}
 
 * 分配算法 设需要申请的空闲块数为u.size
 

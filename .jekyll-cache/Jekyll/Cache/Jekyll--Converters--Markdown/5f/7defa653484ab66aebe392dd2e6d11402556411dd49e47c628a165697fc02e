@@ -1,0 +1,199 @@
+I"�H<p>考大题，拿下！:facepunch:</p>
+
+<!--more-->
+
+<p>VHDL结构体描述方式分为三类：行为描述、RTL描述和结构描述。行为描述是最高级的描述方式，主要描述输入和输出之间的转换关系，并不考虑硬件实现。RTL描述了数据的运动路径、运动方向和运动结果，所以又称<strong>数据流描述</strong>，同时它也是真正可以实现逻辑综合的描述方式。结构描述方式是描述硬件结构的方式，即硬件是怎样构成的。</p>
+
+<h2 id="行为描述">行为描述</h2>
+
+<p>行为描述中含有顺序执行语句，也就是说有 **process **。</p>
+
+<p><strong>4位二进制计数器</strong></p>
+
+<ol>
+  <li>实体说明</li>
+</ol>
+
+<p>首先确定输入输出的元素个数。本题中，输入分别为reset(置零)、en(开始计数)、clk(时钟)、load(置数)、din(数)。输出为q。</p>
+
+<p>其次确定每一个元素的数据类型。reset、en、clk只有0 1两种状态，因此使用std_logic类型；load、q都是二进制向量，因此使用std_logic_vector。</p>
+
+<p>最后写入实体说明</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">entity</span> <span class="n">count4</span> <span class="k">is</span>
+    <span class="k">port</span><span class="p">(</span><span class="n">reset</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">clk</span><span class="p">,</span> <span class="n">load</span><span class="p">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+        <span class="n">din</span><span class="p">:</span><span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">q</span><span class="p">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">end</span> <span class="n">count4</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>结构体说明</li>
+</ol>
+
+<p>行为描述一定要带着process，因此先把架子搭建好。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">architecture</span> <span class="n">count</span> <span class="k">of</span> <span class="n">count4</span> <span class="k">is</span>
+<span class="k">begin</span>
+    <span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">reset</span><span class="p">,</span> <span class="n">load</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="o">...</span>
+    <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+<span class="k">end</span> <span class="n">count</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>明确一下需要完成的功能，置零，置数，计数。置零的条件是reset=0；置数的条件是上升沿+load=0；计数的条件是上升沿。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">reset</span> <span class="o">=</span> <span class="sc">'0'</span><span class="p">)</span> <span class="k">then</span>
+    <span class="n">q</span> <span class="o">&lt;=</span> <span class="s1">"0000"</span><span class="p">;</span>
+<span class="k">elsif</span> <span class="p">(</span><span class="n">clk</span><span class="na">'event</span> <span class="ow">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">'1'</span><span class="p">)</span> <span class="k">then</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">load</span><span class="o">=</span><span class="sc">'0'</span><span class="p">)</span> <span class="k">then</span>
+        <span class="n">q</span><span class="o">&lt;=</span><span class="n">din</span><span class="p">;</span>
+    <span class="k">elsif</span> <span class="n">en</span><span class="o">=</span><span class="sc">'1'</span> <span class="k">then</span>
+        <span class="n">q</span><span class="o">&lt;=</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>为保证安全性，最后给q赋值。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">architecture</span> <span class="n">count</span> <span class="k">of</span> <span class="n">count4</span> <span class="k">is</span>
+    <span class="k">signal</span> <span class="n">qo</span><span class="p">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">begin</span>
+    <span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">reset</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">qo</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">reset</span> <span class="o">=</span> <span class="sc">'0'</span><span class="p">)</span> <span class="k">then</span>
+            <span class="n">qo</span> <span class="o">&lt;=</span> <span class="s1">"0000"</span><span class="p">;</span>
+        <span class="k">elsif</span> <span class="p">(</span><span class="n">clk</span><span class="na">'event</span> <span class="ow">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">'1'</span><span class="p">)</span> <span class="k">then</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">load</span><span class="o">=</span><span class="sc">'0'</span><span class="p">)</span> <span class="k">then</span>
+                <span class="n">qo</span><span class="o">&lt;=</span><span class="n">din</span><span class="p">;</span>
+            <span class="k">elsif</span> <span class="n">en</span><span class="o">=</span><span class="sc">'1'</span> <span class="k">then</span>
+                <span class="n">qo</span><span class="o">&lt;=</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+        <span class="n">q</span><span class="o">&lt;=</span><span class="n">qo</span><span class="p">;</span>
+    <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+<span class="k">end</span> <span class="n">count</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>延迟语句</li>
+</ul>
+
+<p>vhdl描述延时语句有两种类型，惯性延迟和传输延迟。vhdl默认会有惯性延迟，但没有传输延迟。</p>
+
+<p>定义传输延迟可以用下面语句</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">--传输延迟语句</span>
+<span class="n">a</span> <span class="o">&lt;=</span> <span class="sc">'0'</span> <span class="k">after</span> <span class="mi">10</span> <span class="n">ns</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>决断语句</li>
+</ul>
+
+<p>当多个驱动器同时驱动同一信号时，就需要决断语句来判断，又称<strong>多驱动问题</strong>。</p>
+
+<p class="error">这没有想明白:thinking:，老师在PPT上函数根本写的不对。</p>
+
+<ul>
+  <li>GENERIC语句(对考试没软用)</li>
+</ul>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">generic</span><span class="p">(</span><span class="err">类属参数表</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="rtl描述">RTL描述</h2>
+
+<p>RTL描述方法是一种规定设计的寄存器形式为特点的描述方式，即寄存器层次的描述方法。RTL描述方法建立在<strong>并行信号赋值语句</strong>(这是最明显的特点)描述的基础上，描述了数据流的运动方向、运动路径和运动结果，又称数据流描述。RTL描述方式是真正可以实现<strong>逻辑综合</strong>的描述方式。</p>
+
+<p><strong>4选1多路选择器</strong></p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">entity</span> <span class="n">mux4_1</span> <span class="k">is</span>
+    <span class="k">port</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">sel</span><span class="p">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">y</span><span class="p">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
+<span class="k">end</span> <span class="n">mux4_1</span><span class="p">;</span>
+<span class="k">architecture</span> <span class="n">rtl</span> <span class="k">of</span> <span class="n">mux4_1</span> <span class="k">is</span>
+<span class="k">begin</span> 
+    <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">when</span> <span class="n">sel</span><span class="o">=</span><span class="s1">"00"</span> <span class="k">else</span>
+        <span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">when</span> <span class="n">sel</span><span class="o">=</span><span class="s1">"01"</span> <span class="k">else</span>
+        <span class="n">d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">when</span> <span class="n">sel</span><span class="o">=</span><span class="s1">"10"</span> <span class="k">else</span>
+        <span class="n">d</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">when</span> <span class="n">sel</span><span class="o">=</span><span class="s1">"11"</span><span class="p">;</span>
+<span class="k">end</span> <span class="n">rtl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>RTL描述规则
+    <ol>
+      <li>禁止在一个进程中有两个边沿检测出现。</li>
+      <li>禁止使用<strong>边沿检测</strong>的ELSE。</li>
+      <li>基础器描述必须代入信号值。</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="结构描述">结构描述</h2>
+
+<p>vhdl的结构描述方式是描述硬件结构的。结构描述方式常用元件例化和生成语句编写程序。</p>
+
+<p>元件定义格式：</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">component</span> <span class="err">元件名</span> <span class="k">is</span>
+    <span class="k">generic</span><span class="err">语句</span><span class="p">;</span>
+	<span class="k">port</span><span class="err">语句</span><span class="p">;</span>
+<span class="k">end</span> <span class="k">component</span> <span class="err">元件名</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>元件例化：</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">标号名</span><span class="p">:</span> <span class="err">元件名</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="err">信号</span><span class="p">,</span> <span class="o">...</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Eg：</p>
+
+<p><strong>四位等值比较器</strong></p>
+
+<p><img src="https://s2.loli.net/2021/12/23/2uF4DRvOoHtYxLn.png" alt="image-20211209110946372" class="shadow" /></p>
+
+<p>如果让你来用结构描述的方式编写程序，你会怎么做。</p>
+
+<p>首先将输入输出写入实体中。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">entity</span> <span class="n">cmp4</span> <span class="k">is</span> 
+    <span class="k">port</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">y</span><span class="p">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
+<span class="k">entity</span> <span class="n">cmp4</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>然后在结构体中写入元件。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">architecture</span> <span class="n">structural</span> <span class="k">of</span> <span class="n">cmp4</span> <span class="k">is</span>
+    <span class="k">component</span> <span class="n">xnor2</span> <span class="k">is</span>
+    <span class="k">port</span><span class="p">(</span><span class="n">in1</span><span class="p">,</span> <span class="n">in2</span><span class="p">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+         <span class="n">out1</span><span class="p">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
+    <span class="k">end</span> <span class="k">component</span> <span class="n">xnor2</span><span class="p">;</span>
+    <span class="n">componet</span> <span class="n">and4</span> <span class="k">is</span>
+    	<span class="k">port</span><span class="p">(</span><span class="n">in1</span><span class="p">,</span> <span class="n">in2</span><span class="p">,</span> <span class="n">in3</span><span class="p">,</span> <span class="n">in4</span><span class="p">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+            <span class="n">out1</span><span class="p">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
+    <span class="k">end</span> <span class="k">component</span> <span class="n">and4</span><span class="p">;</span>
+    <span class="k">signal</span> <span class="n">s</span><span class="p">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">0</span> <span class="k">to</span> <span class="mi">3</span><span class="p">);</span>
+<span class="k">begin</span>
+    <span class="o">...</span>
+<span class="k">end</span> <span class="n">structual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>最后按图组装就好了。</p>
+
+<div class="language-vhdl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">begin</span>
+    <span class="n">u0</span><span class="p">:</span> <span class="n">xnor2</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+    <span class="n">u1</span><span class="p">:</span> <span class="n">xnor2</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+    <span class="n">u2</span><span class="p">:</span> <span class="n">xnor2</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">u3</span><span class="p">:</span> <span class="n">xnor2</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+	<span class="n">u4</span><span class="p">:</span> <span class="n">and4</span><span class="p">(</span><span class="n">in1</span><span class="o">=&gt;</span><span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">in2</span><span class="o">=&gt;</span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">in3</span><span class="o">=&gt;</span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">in4</span><span class="o">=&gt;</span><span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">out1</span><span class="o">=&gt;</span><span class="n">y</span><span class="p">);</span>
+<span class="k">end</span> <span class="n">sturctual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>完成:happy:; 如果你学过其他的编程语句，相信你一定会更快的上手的。</p>
+
+:ET

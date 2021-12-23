@@ -1,0 +1,101 @@
+I"<p>目前大多数的高校老师都是推荐甚至是强制使用 <strong>Quartus II</strong> 这款软件，为了降低大家重新学习一款软件所花费的时间，因此我会使用这个IDE来写 vhdl 代码。</p>
+
+<!--more-->
+
+<ol>
+  <li>
+    <p>下载安装包</p>
+
+    <p>链接：https://pan.baidu.com/s/1xH4Ykvo92maXenBvHrDbkw 
+提取码：s5j0</p>
+
+    <p class="success">最近百度良心了，就连我这个白嫖用户都下载速度飞起。国家的政策真TM管用！</p>
+  </li>
+  <li>
+    <p>安装Quartus II</p>
+
+    <p>2.1 没有什么需要特别注意的，和正常软件安装方式一样。就是有一点不同，<strong>路径不能包含汉字和空格，空格可以用下划线代替。</strong></p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/uhn6EapHPzgwC8D.png" alt="image-20211206121517321" style="zoom:67%;" /></p>
+
+    <p>2.2 选择next，不然就没有办法安装。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/BaT6ZgqN4PdVb8F.png" alt="image-20211206121637749" style="zoom:67%;" /></p>
+
+    <p>2.3 选择next，理由同上。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/8pVjmuegLR2GDtP.png" alt="image-20211206121743817" style="zoom:67%;" /></p>
+
+    <p>2.4 选择安装路径，我一般都是安装在d盘下。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/xpXl3SOYjFeK5Tv.png" alt="image-20211206121849824" style="zoom:67%;" /></p>
+
+    <p>2.5 需要安装的组件，这里没有必要选，直接下一步就可以啦。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/auQiWtzbPvfZehV.png" alt="image-20211206122043716" style="zoom:67%;" /></p>
+
+    <p>2.6 重中之重，安装！</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/B4QIbfUasyMAo8l.png" alt="image-20211206122152834" style="zoom:67%;" /></p>
+
+    <p>2.7 等待一段时间后，就会安装好。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/2Au3mWlSxBtQfUL.png" alt="image-20211206123300313" style="zoom:67%;" /></p>
+  </li>
+  <li>
+    <p>运行破解器</p>
+
+    <p>3.1 解压破解包，选择合适的版本</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/Mu2orpJLktmQRG6.png" alt="image-20211206124340802" style="zoom:67%;" /></p>
+
+    <p>3.2 解压你选择的版本</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/2hkNTlivKaUfSZm.png" alt="image-20211206124442549" style="zoom:67%;" /></p>
+
+    <p class="warning">注意：一般会有一个exe文件和TXT文件，如果只有txt文件的话，就需要关闭杀毒软件或者添加到白名单中。</p>
+
+    <p>3.3 将破解器复制到 Quartus II 的bin目录下</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/Vk3q1l726TtGcCF.png" alt="image-20211206125538265" style="zoom:67%;" /></p>
+
+    <p>3.3 运行破解器</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/IwalKO4xJNo8Csc.png" alt="image-20211206124834136" style="zoom:67%;" /></p>
+
+    <p>3.4 点击应用生成一个 license.dat 文件，保存它。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/6rIUOYdePyqQl9D.png" alt="image-20211206125926524" style="zoom:67%;" /></p>
+  </li>
+  <li>
+    <p>破解 Quartus II</p>
+
+    <p>4.1 运行Quartus文件</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/BEew9Rn2xUXAN4p.png" alt="image-20211206130241987" style="zoom:67%;" /></p>
+
+    <p>4.2 选择试用30天</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/ViMdRgI3O4o1Nbj.png" alt="image-20211206131152712" style="zoom:67%;" /></p>
+
+    <p>4.3 在界面上方点击”tool”，会出现如下所示。按图点击license setup。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/I6aXiQodJ7MsL1P.png" style="zoom:67%;" /></p>
+
+    <p>4.4 复制NIC ID到license.dat(这个文件就是之前生成的)。</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/kJOujwn6xSbma2M.png" alt="image-20211206131853716" style="zoom:50%;" /></p>
+
+    <p>4.5 改变HOSTID为NIC ID</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/rN3DPuM7XURzoh6.png" alt="image-20211206141426502" style="zoom: 50%;" /></p>
+
+    <p>4.6 返回license setup验证</p>
+
+    <p><img src="https://s2.loli.net/2021/12/23/J9BAuz4gimye3x7.png" alt="image-20211206141527387" style="zoom:67%;" /></p>
+
+    <p class="warning">如果说有效期没有改变的话，请检查“license file”的路径是否正确，然后回车确认一下就可以了。</p>
+  </li>
+</ol>
+
+:ET

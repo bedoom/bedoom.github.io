@@ -193,7 +193,7 @@ tags:
 
 <div class="grid">   
     <div class="cell cell--5" align=center>
-        <img src="https://gitee.com/bedoom/images/raw/master/202111292037186.png" alt="image-20211129203659986"  />
+        <img src="https://s2.loli.net/2021/12/23/O9cpAtNILxZgseb.png" alt="image-20211129203659986"  />
     </div>  
     <div class="cell cell--auto">
         <p>就绪状态：当进程获得除处理机以外的所有资源，只要在获得处理机就可以立即执行。</p>
@@ -205,6 +205,7 @@ tags:
         </p>
     </div> 
 </div>
+
 **进程之间的转换**
 
 就绪→执行状态：进程获得处理机资源，可以开始执行。
@@ -233,13 +234,13 @@ tags:
 
   1. 链接方式
 
-     ![image-20211129211650784](https://gitee.com/bedoom/images/raw/master/202111292116661.png){:.shadow}
+     ![image-20211129211650784](https://s2.loli.net/2021/12/23/pTbEWdRfNgHYZ8O.png){:.shadow}
 
      将具有相同状态的进程控制块 PCB 链接成一个**队列**，形成就绪队列、阻塞队列和空队列。处于就绪状态的PCB可按照某种算法排成多个就绪队列；根据阻塞原因的不同可把处于阻塞状态的进程的PCB排成多个队列，如等待I/O操作完成队列，等待分配内存队列等。
 
   2. 索引方式
 
-     ![image-20211129212509998](https://gitee.com/bedoom/images/raw/master/202111292125060.png){:.shadow}
+     ![image-20211129212509998](https://s2.loli.net/2021/12/23/WD9GVn8joYqxOL5.png){:.shadow}
 
      系统根据所有进程的状态建立几张索引表，例如，就绪索引表、阻塞索引表等，并把索引表在内存的首地址记录与一些专用单元中。在每个索引表的表目中，记录具有相应状态的某个进程控制块PCB中的地址。
 
@@ -271,7 +272,7 @@ tags:
 
      ​	④ 将新进程插入就绪队列：若就绪队列未满，则将新进程插入。
 
-     ![image-20211130144334996](https://gitee.com/bedoom/images/raw/master/202111301443755.png){:.shadow}
+     ![image-20211130144334996](https://s2.loli.net/2021/12/23/hQrNavqS5m2dfjk.png){:.shadow}
 
      ​	
 
@@ -297,7 +298,7 @@ tags:
 
      ​	⑤ 将被终止的PCB从队列中移出，等待其他程序搜集。
 
-     ![image-20211130154007263](https://gitee.com/bedoom/images/raw/master/202111301540395.png){:.shadow}
+     ![image-20211130154007263](https://s2.loli.net/2021/12/23/UPQnVXCtObKiHZ6.png){:.shadow}
 
 * 进程的阻塞与唤醒
 
@@ -408,7 +409,7 @@ tags:
   
   7. 多级反馈队列轮转算法
   
-     ![image-20211130171945620](https://gitee.com/bedoom/images/raw/master/202111301719684.png){:.shadow}
+     ![image-20211130171945620](https://s2.loli.net/2021/12/23/FTvY5h9ulNCzwxp.png){:.shadow}
   
      > 算法：刚刚进入的进程处于第一优先级。当进程将规定的时间片用完后，优先级会降低一个档次。
      >

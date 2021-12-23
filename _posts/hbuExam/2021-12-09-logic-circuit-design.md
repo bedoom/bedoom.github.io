@@ -24,8 +24,8 @@ tags:
 
 <div class="grid-container"> 
     <div class="grid grid--p-3">   
-        <div class="cell cell--6"><div><img src="https://gitee.com/bedoom/images/raw/master/202112091626096.png" alt="image-20211209162623129"  /></div></div>   
-        <div class="cell cell--6"><div><img src="https://gitee.com/bedoom/images/raw/master/202112091631474.png" alt="image-20211209163059790"  /></div></div>     
+        <div class="cell cell--6"><div><img src="https://s2.loli.net/2021/12/23/DRof4XxdC6HTPbw.png" alt="image-20211209162623129"  /></div></div>   
+        <div class="cell cell--6"><div><img src="https://s2.loli.net/2021/12/23/mRyofbtkVDwBEQH.png" alt="image-20211209163059790"  /></div></div>     
     </div>
 </div>
 **方法一**：写出表达式直接一一对应，是最简单的，但是I don't like。
@@ -71,7 +71,7 @@ END rtl;
 
 ### 设计一个双向总线缓冲器
 
-![image-20211209164411678](https://gitee.com/bedoom/images/raw/master/202112091644789.png){:.shadow}
+![image-20211209164411678](https://s2.loli.net/2021/12/23/9OinFTcxkbNvBg5.png){:.shadow}
 
 
 
@@ -87,7 +87,7 @@ Eg:
 
 要求设计一个具有同步清零和并行输出功能的10进制加法计数器，其引脚名称和逻辑功能如下表所示。
 
-![image-20211212140637456](https://gitee.com/bedoom/images/raw/master/202112121406899.png){:.shadow}
+![image-20211212140637456](https://s2.loli.net/2021/12/23/qnm7pTbyEvOZQYr.png){:.shadow}
 
 ```vhdl
 library ieee;
