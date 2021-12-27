@@ -26,6 +26,9 @@
       .douban-button {
         @include clickable($text-color-1, $douban-color);
       }
+      .zhihu-button {
+        @include clickable($text-color-1, $zhihu-color);
+      }
     }
   }
 }
