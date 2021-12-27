@@ -58,7 +58,7 @@
     {%- endif -%}
 
     {%- if _author.zhihu -%}
-      <li title="{{ __return | replace: '[NAME]', 'Linkedin' }}">
+      <li title="{{ __return | replace: '[NAME]', '知乎' }}">
         <a class="button button--circle zhihu-button" itemprop="sameAs" href="https://www.zhihu.com/people/{{ _author.zhihu }}" target="_blank">
           <div class="icon">{%- include svg/icon/social/zhihu.svg -%}</div>
         </a>
