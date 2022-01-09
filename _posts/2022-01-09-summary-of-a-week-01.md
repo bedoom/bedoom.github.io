@@ -10,7 +10,7 @@ article_header:
   background_color: '#203028'
   background_image:
     gradient: 'linear-gradient(135deg, rgba(34, 139, 87 , .4), rgba(139, 34, 139, .4))'
-    src: https://gitee.com/bedoom/images/raw/master/202201091119353.jpg
+    src: assets/images/cover.jpg
 date: 2022-01-09
 modify_date: 2022-01-09
 author: "Bedoom"
